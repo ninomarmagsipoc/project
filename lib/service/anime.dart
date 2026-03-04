@@ -7,35 +7,67 @@ class AnimePage extends StatefulWidget {
   const AnimePage({super.key});
 
   @override
-  State<AnimePage> createState() => _AnimePage();
+  State<AnimePage> createState() => _AnimePageState();
 }
 
-class _AnimePage extends State<AnimePage> {
+class _AnimePageState extends State<AnimePage> {
+  late Future<List<dynamic>> _animeFuture;
+
   @override
   void initState() {
-    AnimeApi.fetchAnimes();
     super.initState();
+    _animeFuture = AnimeApi.fetchAnimes();
+  }
+
+  Future<void> _refresh() async {
+    setState(() {
+      _animeFuture = AnimeApi.fetchAnimes();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: AnimeApi.fetchAnimes(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
+    return Scaffold(
+      body: FutureBuilder<List<dynamic>>(
+        future: _animeFuture,
+        builder: (context, snapshot) {
+          // Loading
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-        if (snapshot.data != null) {
+          // Error
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                "Something went wrong 😢\n${snapshot.error}",
+                textAlign: TextAlign.center,
+              ),
+            );
+          }
+
+          // Empty
+          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text("No anime found"));
+          }
+
           final animes = snapshot.data!;
 
-          return Scaffold(
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: ListView.builder(
+          return RefreshIndicator(
+            onRefresh: _refresh,
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: GridView.builder(
                 itemCount: animes.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                  childAspectRatio: 0.65,
+                ),
                 itemBuilder: (context, index) {
-                  final anime = animes.elementAt(index);
+                  final anime = animes[index];
+
                   return GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(
@@ -50,10 +82,8 @@ class _AnimePage extends State<AnimePage> {
               ),
             ),
           );
-        }
-
-        return Center(child: Text(snapshot.error.toString()));
-      },
+        },
+      ),
     );
   }
 }
