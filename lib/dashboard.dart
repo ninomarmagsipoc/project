@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/service/anime.dart';
 import 'package:project/tab/home.dart';
 import 'package:project/tab/profile.dart';
 import 'package:project/tab/settings.dart';
@@ -13,12 +14,13 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   int selectedIndex = 0;
 
-  final List<String> title = ['Home', 'Setting', 'Profile'];
+  final List<String> title = ['Home', 'Setting', 'Profile', 'Anime'];
 
   final List<Widget> pages = [
     const HomePage(),
     const SettingPage(),
     const ProfilePage(),
+    const AnimePage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,17 @@ class _DashboardState extends State<Dashboard> {
       drawer: Drawer(
         child: Column(
           children: [
-            DrawerHeader(child: Text('Dashboard')),
+            DrawerHeader(child: Text(title[selectedIndex])),
+            ListTile(
+              title: Text('Anime'),
+              onTap: () {
+                Navigator.pop(context);
+
+                setState(() {
+                  selectedIndex = 3;
+                });
+              },
+            ),
             ListTile(
               title: Text('LogOut'),
               onTap: () {

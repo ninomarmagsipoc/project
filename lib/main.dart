@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/dashboard.dart';
 import 'package:project/screen/signin.dart';
+import 'package:project/service/anime.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,11 +16,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Dashboard',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: const SignIn(),
       initialRoute: '/',
       routes: {
         '/signin': (context) => const SignIn(),
         '/dashboard': (context) => const Dashboard(),
+        '/anime': (context) => const AnimePage(),
       },
     );
   }
