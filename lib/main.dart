@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Dashboard',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+      home: SignIn(),
       initialRoute: '/',
       routes: {
         '/signin': (context) => const SignIn(),
