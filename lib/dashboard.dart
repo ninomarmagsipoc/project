@@ -12,6 +12,9 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int selectedIndex = 0;
+
+  final List<String> title = ['Home', 'Setting', 'Profile'];
+
   final List<Widget> pages = [
     const HomePage(),
     const SettingPage(),
@@ -20,13 +23,43 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Dashboard')),
+      appBar: AppBar(title: Text(title[selectedIndex])),
       drawer: Drawer(
         child: Column(
           children: [
             DrawerHeader(child: Text('Dashboard')),
-            ListTile(title: Text('Dashboard'), onTap: () {}),
-            ListTile(title: Text('LogOut'), onTap: () {}),
+            ListTile(
+              title: Text('LogOut'),
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('Log Out'),
+                      content: Text('Are you Sure You Want to Log out?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              '/signin',
+                              (router) => false,
+                            );
+                          },
+                          child: Text('Yes'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('No'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
           ],
         ),
       ),
