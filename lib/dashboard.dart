@@ -14,7 +14,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   int selectedIndex = 0;
 
-  final List<String> title = ['Home', 'Setting', 'Profile', 'Anime'];
+  final List<String> title = ['Home', 'Setting', 'Profile', 'Anime List'];
 
   final List<Widget> pages = [
     const HomePage(),
