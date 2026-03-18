@@ -20,6 +20,7 @@ https://github.com/user-attachments/assets/7d18e367-6daf-42d0-97d3-269864e076b5
 ---
 
 ## API Choice
+
 **API Name:** Studio Ghibli API
 **Base URL:** https://ghibliapi.vercel.app/
 **Documentation:** https://ghibliapi.vercel.app
