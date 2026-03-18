@@ -21,11 +21,11 @@ https://github.com/user-attachments/assets/7d18e367-6daf-42d0-97d3-269864e076b5
 
 ## API Choice
 
-**API Name:** Studio Ghibli API
-**Base URL:** `https://ghibliapi.vercel.app/`
-**Documentation:** https://ghibliapi.vercel.app
-**Auth Required:** None 
-**Response Format:** JSON
+- **API Name:** Studio Ghibli API
+- **Base URL:** `https://ghibliapi.vercel.app/`
+- **Documentation:** https://ghibliapi.vercel.app
+- **Auth Required:** None 
+- **Response Format:** JSON
 
 The Studio Ghibli API provides rich, structured JSON data about the world of Studio Ghibli — including people, species, locations, and films. It is a RESTful web service that requires no authentication and supports HTTPS, making it ideal for multi-endpoint Flutter integration and dynamic data display in mobile applications.
 
