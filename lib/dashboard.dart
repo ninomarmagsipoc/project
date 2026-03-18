@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project/service/Species.dart';
 import 'package:project/service/anime.dart';
-import 'package:project/tab/home.dart';
 import 'package:project/tab/profile.dart';
 import 'package:project/tab/settings.dart';
 
@@ -14,13 +14,18 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   int selectedIndex = 0;
 
-  final List<String> title = ['Home', 'Setting', 'Profile', 'Anime List'];
+  final List<String> title = [
+    'Anime List',
+    'People List',
+    'Location List',
+    'Species List'
+  ];
 
   final List<Widget> pages = [
-    const HomePage(),
-    const SettingPage(),
-    const ProfilePage(),
     const AnimePage(),
+    const ProfilePage(),
+    const LocationsPage(),
+    const Species(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -30,16 +35,13 @@ class _DashboardState extends State<Dashboard> {
         child: Column(
           children: [
             DrawerHeader(child: Text(title[selectedIndex])),
-            ListTile(
-              title: Text('Anime'),
-              onTap: () {
-                Navigator.pop(context);
+            ListTile(title: Text('Species'), onTap: () {
+              Navigator.pop(context);
 
-                setState(() {
-                  selectedIndex = 3;
-                });
-              },
-            ),
+              setState(() {
+                selectedIndex = 3;
+              });
+            },),
             ListTile(
               title: Text('LogOut'),
               onTap: () {
@@ -77,11 +79,11 @@ class _DashboardState extends State<Dashboard> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          BottomNavigationBarItem(icon: Icon(Icons.movie), label: 'Anime'),
+          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'People'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.location_city),
+            label: 'Location',
           ),
         ],
         onTap: (index) {
