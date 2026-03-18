@@ -17,6 +17,8 @@ samples, guidance on mobile development, and a full API reference.
 
 https://github.com/user-attachments/assets/7d18e367-6daf-42d0-97d3-269864e076b5
 
+---
+
 ## API Choice
 **API Name:** Studio Ghibli API
 **Base URL:** https://ghibliapi.vercel.app/
@@ -67,9 +69,9 @@ lib/
 
 A `BottomNavigationBar` provides access to three top-level sections:
 
--**Anime** — Show All Film
--**People** — Show All Character
--**Location** — Show All Location
+- **Anime** — Show All Film
+- **People** — Show All Character
+- **Location** — Show All Location
 
 ---
 
